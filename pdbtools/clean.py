@@ -14,7 +14,8 @@ __author__ = "Michael J. Harms"
 __date__ = "070727"
 
 import sys, time, string, os, shutil
-from . import atom_renumber, charmm
+from . import charmm
+import pdbtools.atom_renumber as pdb_atom_renumber
 from .helper import container
 from .data.common import *
 
@@ -102,9 +103,9 @@ def stripACS(coord):
         Mini function that removes letters that denote ACS.
         """
 
-        if line[16] in string.letters:
+        if line[16] in string.ascii_letters:
             line = "%s %s" % (line[:16],line[17:])
-        if line[26] in string.letters:
+        if line[26] in string.ascii_letters:
             line = "%s %s" % (line[:26],line[27:])
 
         return line

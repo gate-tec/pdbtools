@@ -13,6 +13,8 @@ __author__ = "Michael J. Harms"
 __date__ = "080418"
 
 import math, os
+from subprocess import Popen, PIPE
+
 from . import gen_input
 
 # Set up charmm binary
@@ -68,10 +70,12 @@ def runCharmm(input):
 
     print("Running: %s" % (charmm_bin))
 
-    cin, cout = os.popen2(charmm_bin)
-    cin.write(input)
+    p = Popen([charmm_bin], bufsize=0, stdin=PIPE, stdout=PIPE)
+    (cin, cout) = (p.stdin, p.stdout)
+    # cin, cout = os.popen2(charmm_bin)
+    cin.write(input.encode('utf-8'))
     cin.close()
-    out = cout.read()
+    out = cout.read().decode('utf-8', errors='ignore')
     cout.close()
 
     return out

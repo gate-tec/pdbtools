@@ -2,5 +2,6 @@
 # This program is distributed under General Public License v. 3.  See the file
 # COPYING for a copy of the license.  
 
-__all__ = ["interface.py","gen_input.py"]
+from pdbtools.charmm.interface import *
+from pdbtools.charmm.gen_input import *
 
